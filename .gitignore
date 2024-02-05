@@ -7,6 +7,7 @@
 .yarn/cache
 .yarn/*.gz
 .yarn/unplugged
+.env
 
 # testing
 /coverage
