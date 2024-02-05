@@ -113,7 +113,8 @@ function LoginPage() {
         onClick={signupMode ? onSignup : onLoginPressed}
         disabled={loading || !validated}
         style={buttonStyle}
-        variant="contained">
+        variant="contained"
+      >
         {signupMode ? 'Sign up' : 'Login'}
       </Button>
     </div>
