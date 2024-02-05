@@ -2,14 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button, Checkbox, TextField } from '@mui/material';
 import { buttonStyle, textField, wrapperStyle } from './LoginStyles';
 import { useNavigate } from 'react-router-dom';
-import { Account, Client, ID } from 'appwrite';
-
-const client = new Client();
-
-client
-  .setEndpoint(process.env.REACT_APP_APPWRITE_END_POINT)
-  .setProject(process.env.REACT_APP_APPWRITE_PROJECT_ID);
-const account = new Account(client);
+import authService from '../../services/authService';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -34,8 +27,8 @@ function LoginPage() {
     }
   }, [email, password]);
   const onLoginPressed = async () => {
-    await account
-      .createEmailSession(email, password)
+    await authService
+      .createSession(email, password)
       .then((data) => {
         navigate('/dashboard');
         console.log('Email login data--->', data);
@@ -45,8 +38,8 @@ function LoginPage() {
       });
   };
   const onSignup = async () => {
-    await account
-      .create(ID.unique(), email, password, name)
+    await authService
+      .createUser(email, password, name)
       .then((data) => {
         navigate('/dashboard');
         console.log('Email login data--->', data);
